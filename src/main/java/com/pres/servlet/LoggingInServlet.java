@@ -38,16 +38,16 @@ public class LoggingInServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 //        req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
-
-        String Q = req.getParameter("name");
+        resp.setCharacterEncoding("UTF-8");
+        final String Q = req.getParameter("name");
 
         switch (req.getParameter("name")) {
             case ("customer"):
-                req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/customer");
 
                 break;
             case ("admin"):
-                req.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/admin");
                 break;
         }
     }

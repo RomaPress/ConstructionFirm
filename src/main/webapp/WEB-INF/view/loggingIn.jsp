@@ -7,14 +7,14 @@
 <body>
 Вход
 <form method="post" action="<c:url value='/'/>">
-    <input type="number" hidden name="name" value="customer" />
-    <input type="submit" name="customer" value="Войти как заказчик"/>
+    <input type="text" hidden name="name" value="customer" />
+    <input type="submit"  value="Войти как заказчик"/>
 </form>
 
-<%--<form method="post" action="<c:url value='/'/>">--%>
-<%--    <input type="number" hidden name="name" value="admin" />--%>
-<%--    <input type="submit" name="admin" value="Войти как администратор"/>--%>
-<%--</form>--%>
+<form method="post" action="<c:url value='/'/>">
+    <input type="text" hidden name="name" value="admin" />
+    <input type="submit" value="Войти как администратор"/>
+</form>
 
 </body>
 </html>
