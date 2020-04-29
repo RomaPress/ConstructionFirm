@@ -56,19 +56,19 @@ public class ServiceRepository implements Repository {
         return allService;
     }
 
-    public Service getServiceByServiceId(int service_id) {
+    public Service getServiceNameByServiceId(int service_id) {
 
         Service service = new Service();
 
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select name_service from db_construction_firm.service where service_id = ?;");
+            PreparedStatement statement = connection.prepareStatement("select name_service, service_id from db_construction_firm.service where service_id = ?;");
 
             statement.setInt(1, service_id);
             statement.execute();
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                service.setService_id(rs.getInt("service_id"));
                 service.setName_service(rs.getString("name_service"));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

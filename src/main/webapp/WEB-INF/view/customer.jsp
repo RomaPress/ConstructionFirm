@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="classificationk" class="com.pres.database.repositories.get.GetClassification" scope="page"/>
+<jsp:useBean id="classification" class="com.pres.database.repositories.get.GetClassification" scope="page"/>
 <html>
 <head>
     <title>Title</title>
@@ -10,7 +10,10 @@
 <p>Услуги</p>
 
 <a>Корзина</a>
-
+<form method="get" action="<c:url value='/basket'/>">
+    <input type="text" hidden name="goToBasket" value="showBasket" />
+    <input type="submit" value="Заказать"/>
+</form>
 
 <% int i = -1;%>
 <c:forEach var="i" items="${serviceTable}">
@@ -18,7 +21,7 @@
 
             <caption>
                 <h2>
-                <%= classificationk.getClassification().get(++i)%>
+                <%= classification.getClassification().get(++i)%>
                 </h2>
             </caption>
 
@@ -36,7 +39,7 @@
                 <td><c:out value="${j.unit_price}"/></td>
                 <td><c:out value="${j.unit}"/></td>
                 <td>
-                    <form method="post" action="<c:url value='/customer'/>">
+                    <form method="post" action="<c:url value='/basket'/>">
                         <input type="number" hidden name="id" value="${j.service_id}" />
                         <input type="submit" name="add" value="Заказать"/>
                     </form>

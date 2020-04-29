@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="list" class="com.pres.servlet.BasketServlet" scope="page"/>
 <html>
 <head>
     <title>Title1</title>
@@ -16,17 +17,25 @@
     </caption>
 
     <tr>
-<%--        <th>№</th>--%>
+        <th>№</th>
         <th>Название услуги</th>
+        <th>удалить</th>
     </tr>
-<%--        <% int k = 0;%>--%>
-<c:forEach var="i" items="${basket}">
+        <% int i = 0;%>
+    <c:forEach var="i" items="${ServiceToBasket}">
     <tr>
-<%--        <th><c:out value="${k+1}"/></th>--%>
-        <th><c:out value="${i.name_service}"/></th>
+        <td><%=++i%>
+        </td>
+        <td><c:out value="${i.name_service}"/></td>
+        <td>
+            <form method="post" action="<c:url value='/'/>">
+                <input type="number" hidden name=" delete" value="${i.service_id}"/>
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
     </tr>
 
 
-</c:forEach>
+    </c:forEach>
 </body>
 </html>

@@ -27,7 +27,7 @@
         <servlet-class>com.pres.servlet.CustomerServlet</servlet-class>
     </servlet>
 
-    <!--Корзина-->
+    <!--Корзинау-->
     <servlet-mapping>
         <servlet-name>BasketOfOrders</servlet-name>
         <url-pattern>/basket</url-pattern>
@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>BasketOfOrders</servlet-name>
-        <servlet-class>com.pres.servlet.AddToBasketServlet</servlet-class>
+        <servlet-class>com.pres.servlet.BasketServlet</servlet-class>
     </servlet>
 
     <!--Вход в систему от имени администратора-->

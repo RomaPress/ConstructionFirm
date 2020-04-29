@@ -14,4 +14,6 @@ public class AdminServlet extends HttpServlet {
 
         req.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(req, resp);
     }
+
+
 }
