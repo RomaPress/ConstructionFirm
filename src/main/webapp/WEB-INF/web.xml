@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--Вход в систему-->
+    <servlet-mapping>
+        <servlet-name>LoggingInSystem</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoggingInSystem</servlet-name>
+        <servlet-class>com.pres.servlet.LoggingInServlet</servlet-class>
+    </servlet>
+
+    <!--Вход в систему от имени клиента-->
+    <servlet-mapping>
+        <servlet-name>GetStartPageCustomer</servlet-name>
+        <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetStartPageCustomer</servlet-name>
+        <servlet-class>com.pres.servlet.CustomerServlet</servlet-class>
+    </servlet>
+
+    <!--Корзина-->
+    <servlet-mapping>
+        <servlet-name>BasketOfOrders</servlet-name>
+        <url-pattern>/basket</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BasketOfOrders</servlet-name>
+        <servlet-class>com.pres.servlet.AddToBasketServlet</servlet-class>
+    </servlet>
+
+    <!--Вход в систему от имени администратора-->
+    <servlet-mapping>
+        <servlet-name>GetStartPageAdmin</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetStartPageAdmin</servlet-name>
+        <servlet-class>com.pres.servlet.AdminServlet</servlet-class>
+    </servlet>
+</web-app>
+        
