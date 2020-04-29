@@ -28,14 +28,13 @@
         </td>
         <td><c:out value="${i.name_service}"/></td>
         <td>
-            <form method="post" action="<c:url value='/'/>">
-                <input type="number" hidden name=" delete" value="${i.service_id}"/>
+            <form method="get" action="<c:url value='/basket'/>">
+                <input type="number" hidden name="delete" value="${i.service_id}"/>
                 <input type="submit" value="Удалить"/>
             </form>
         </td>
     </tr>
-
-
     </c:forEach>
+
 </body>
 </html>

@@ -25,7 +25,6 @@ public class CustomerServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         session.setAttribute("serviceTable", serviceTable.getService());
-
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
 
@@ -33,7 +32,6 @@ public class CustomerServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServiceRepository oneService = new ServiceRepository();
-
 
         idToBasket.add(oneService.getServiceNameByServiceId(Integer.parseInt(req.getParameter("id"))));
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);

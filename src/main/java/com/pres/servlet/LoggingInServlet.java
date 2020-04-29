@@ -37,13 +37,14 @@ public class LoggingInServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
+
         resp.setCharacterEncoding("UTF-8");
         final String Q = req.getParameter("name");
 
         switch (req.getParameter("name")) {
             case ("customer"):
-                resp.sendRedirect(req.getContextPath() + "/customer");
+//                resp.sendRedirect(req.getContextPath() + "/customer");
+                req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
 
                 break;
             case ("admin"):
