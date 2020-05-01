@@ -43,8 +43,8 @@ public class LoggingInServlet extends HttpServlet {
 
         switch (req.getParameter("name")) {
             case ("customer"):
-//                resp.sendRedirect(req.getContextPath() + "/customer");
-                req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/customer");
+
 
                 break;
             case ("admin"):

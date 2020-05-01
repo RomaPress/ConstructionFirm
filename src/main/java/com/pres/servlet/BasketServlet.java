@@ -1,6 +1,10 @@
 package com.pres.servlet;
 
+import com.pres.database.repositories.impl.CustomerRepository;
+import com.pres.database.repositories.impl.OrderRepository;
+import com.pres.database.repositories.impl.ServiceOrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
+import com.pres.model.Customer;
 import com.pres.model.Service;
 
 import javax.servlet.ServletException;
@@ -9,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class BasketServlet extends HttpServlet {
@@ -29,6 +32,20 @@ public class BasketServlet extends HttpServlet {
             }
             ServiceToBasket.remove(del);
         }
+
+        if(req.getParameterMap().containsKey("Ok")){
+            final Customer customer = new Customer(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("patronymic"),Integer.parseInt(req.getParameter("phone_number")));
+
+            CustomerRepository cr = new CustomerRepository();
+            cr.setCustomer(customer);
+
+            OrderRepository or = new OrderRepository();
+            or.setOrder();
+
+            ServiceOrderRepository sor = new ServiceOrderRepository();
+            sor.setServiceOrder(ServiceToBasket);
+        }
+
 
         req.setAttribute("ServiceToBasket", ServiceToBasket);
         req.getRequestDispatcher("/WEB-INF/view/basket.jsp").forward(req, resp);

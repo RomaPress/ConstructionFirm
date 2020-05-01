@@ -36,5 +36,32 @@
     </tr>
     </c:forEach>
 
+
+    <form method="get" action="<c:url value='/basket'/>">
+        <label>
+            <input type="text" name="first_name" />first_name
+        </label>
+        <br/>
+        <label>
+            <input type="text" name="last_name" />last_name
+        </label>
+        <br/>
+        <label>
+            <input type="text" name="patronymic"/> patronymic
+        </label>
+        <br/>
+        <label>
+            <input type="number" name="phone_number" />phone_number
+        </label>
+        <br/>
+
+        <input type="submit"  name="Ok" value="Заказать"><br>
+    </form>
+
+
+
+
+
+
 </body>
 </html>
