@@ -6,7 +6,6 @@
     <title>Title1</title>
 </head>
 <body>
-<p>Это корзина</p>
 
 <table border="2">
 

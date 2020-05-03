@@ -34,7 +34,11 @@ public class BasketServlet extends HttpServlet {
         }
 
         if(req.getParameterMap().containsKey("Ok")){
-            final Customer customer = new Customer(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("patronymic"),Integer.parseInt(req.getParameter("phone_number")));
+            final Customer customer = new Customer();
+            customer.setFirst_name(req.getParameter("first_name"));
+            customer.setLast_name(req.getParameter("last_name"));
+            customer.setPatronymic(req.getParameter("patronymic"));
+            customer.setPhone_number(Integer.parseInt(req.getParameter("phone_number")));
 
             CustomerRepository cr = new CustomerRepository();
             cr.setCustomer(customer);

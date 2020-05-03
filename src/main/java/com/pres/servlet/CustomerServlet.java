@@ -1,5 +1,6 @@
 package com.pres.servlet;
 
+import com.pres.database.repositories.get.GetService;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.model.Service;
 
@@ -21,7 +22,7 @@ public class CustomerServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ServiceRepository serviceTable = new ServiceRepository();
+        GetService serviceTable = new GetService();
         HttpSession session = req.getSession();
 
         session.setAttribute("serviceTable", serviceTable.getService());

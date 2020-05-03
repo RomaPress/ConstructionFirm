@@ -1,7 +1,6 @@
 package com.pres.database.repositories.impl;
 
 import com.pres.database.repositories.Repository;
-import com.pres.database.repositories.get.GetClassification;
 import com.pres.model.Service;
 
 import java.sql.Connection;
@@ -9,52 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ServiceRepository implements Repository {
 
-    public List<List<Service>> getService() {
-
-        GetClassification cf = new GetClassification();
-
-        List<List<Service>> allService = new ArrayList<>();
-
-        try (Connection connection = getConnection()) {
-
-
-            for (int i = 0; i < cf.getClassification().size(); i++) {
-
-                PreparedStatement statement = connection.prepareStatement("select service_id, name_service, unit_price, un.name_unit  from db_construction_firm.service sr inner join  db_construction_firm.classification cl on sr.classification_id = cl.classification_id  inner join db_construction_firm.unit un on sr.unit_id = un.unit_id where name_classification = ? ");
-                statement.setString(1, cf.getClassification().get(i));
-                statement.execute();
-                ResultSet rs = statement.executeQuery();
-
-
-                List<Service> classificationService = new ArrayList<>();
-
-                int k = 0;
-                Service oneService;
-
-                while (rs.next()) {
-                    oneService = new Service();
-
-                    oneService.setId(++k);
-                    oneService.setService_id(rs.getInt("service_id"));
-                    oneService.setName_service(rs.getString("name_service"));
-                    oneService.setUnit_price(rs.getFloat("unit_price"));
-                    oneService.setUnit("грн/" + rs.getString("name_unit"));
-
-
-                    classificationService.add(oneService);
-                }
-                allService.add(classificationService);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return allService;
-    }
 
     public Service getServiceNameByServiceId(int service_id) {
 
@@ -75,5 +35,49 @@ public class ServiceRepository implements Repository {
         }
         return service;
     }
+
+    public Map<Integer, List<Service>> getOrderedService(List<Integer> order_id) {
+
+        Map<Integer, List<Service>> result = new HashMap<>();
+
+        try (Connection connection = getConnection()) {
+
+            for (Integer i : order_id) {
+
+
+                PreparedStatement statement = connection.prepareStatement("select sro.order_id, sr.service_id, sr.name_service, un.name_unit, sro.amount from db_construction_firm.service sr left join db_construction_firm.unit un on sr.unit_id = un.unit_id   right join db_construction_firm.service_order sro on sr.service_id = sro.service_id where sro.order_id = ?;");
+                statement.setInt(1, i);
+                ResultSet rs = statement.executeQuery();
+
+
+                List<Service> orderedService = new ArrayList<>();
+                while (rs.next()) {
+                    Service service = new Service();
+                    service.setService_id(rs.getInt("service_id"));
+                    service.setName_service(rs.getString("name_service"));
+                    service.setName_unit(rs.getString("name_unit"));
+                    service.setAmount(rs.getFloat("amount"));
+                    orderedService.add(service);
+                }
+                result.put(i, orderedService);
+            }
+//            for (Map.Entry entry : result.entrySet()) {
+//                System.out.println("Key: " + entry.getKey() + " Value: "
+//                        + entry.getValue());
+//            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+//    public static void main(String[] args) {
+//        GetOrder w = new GetOrder();
+//
+//
+//        ServiceRepository q =new ServiceRepository();
+//        q.getOrderedService(w.getOrderId());
+//    }
 }
 

@@ -44,8 +44,6 @@ public class LoggingInServlet extends HttpServlet {
         switch (req.getParameter("name")) {
             case ("customer"):
                 resp.sendRedirect(req.getContextPath() + "/customer");
-
-
                 break;
             case ("admin"):
                 resp.sendRedirect(req.getContextPath() + "/admin");

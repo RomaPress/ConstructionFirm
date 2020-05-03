@@ -4,25 +4,26 @@ import java.util.Objects;
 
 public class Service {
 
-    private int id;
-    private String name_unit;
     private int service_id;
     private String name_service;
+    private String name_unit;
     private float unit_price;
+    private float amount;
 
 
-    public Service(int id, int service_id, String name_service,String name_unit, float unit_price) {
-        this.id = id;
+
+    public Service(int service_id, String name_service, String name_unit, float unit_price, float amount) {
         this.service_id = service_id;
         this.name_service = name_service;
         this.name_unit = name_unit;
         this.unit_price = unit_price;
+        this.amount = amount;
     }
 
     public Service(){
     }
 
-    public String getUnit(){
+    public String getName_unit(){
         return name_unit;
     }
 
@@ -38,12 +39,16 @@ public class Service {
         return unit_price;
     }
 
-    public int getId(){
-        return id;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setUnit(String unit){
-        this.name_unit = unit;
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public void setName_unit(String name_unit){
+        this.name_unit = name_unit;
     }
 
     public void setService_id(int service_id){
@@ -58,18 +63,15 @@ public class Service {
         this.unit_price = unit_price;
     }
 
-    public void setId(int id){
-        this.id = id;
-    }
-
 
     @Override
     public String toString() {
         return "Service{" +
-                "id=" + id +
-                ", service_id=" + service_id +
+                "service_id=" + service_id +
                 ", name_service='" + name_service + '\'' +
+                ", name_unit='" + name_unit + '\'' +
                 ", unit_price=" + unit_price +
+                ", amount='" + amount + '\'' +
                 '}';
     }
 
@@ -78,15 +80,15 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return id == service.id &&
-                service_id == service.service_id &&
+        return service_id == service.service_id &&
                 Float.compare(service.unit_price, unit_price) == 0 &&
+                Objects.equals(name_service, service.name_service) &&
                 Objects.equals(name_unit, service.name_unit) &&
-                Objects.equals(name_service, service.name_service);
+                Objects.equals(amount, service.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name_unit, service_id, name_service, unit_price);
+        return Objects.hash(service_id, name_service, name_unit, unit_price, amount);
     }
 }

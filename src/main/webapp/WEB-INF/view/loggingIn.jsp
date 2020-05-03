@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-Вход
 <form method="post" action="<c:url value='/'/>">
     <input type="text" hidden name="name" value="customer" />
     <input type="submit"  value="Войти как заказчик"/>

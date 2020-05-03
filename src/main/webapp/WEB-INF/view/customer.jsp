@@ -7,9 +7,7 @@
 </head>
 <body>
 
-<p>Услуги</p>
 
-<a>Корзина</a>
 <form method="get" action="<c:url value='/basket'/>">
     <input type="text" hidden name="goToBasket" value="showBasket" />
     <input type="submit" value="Заказать"/>
@@ -32,16 +30,17 @@
             <td>за единицу</td>
             <td>добавить в корину</td>
         </tr>
+        <%int k = 1;%>
         <c:forEach var="j" items="${i}">
             <tr>
-                <td><c:out value="${j.id}"/></td>
+                <td><%= k++%></td>
                 <td><c:out value="${j.name_service}"/></td>
                 <td><c:out value="${j.unit_price}"/></td>
                 <td><c:out value="${j.unit}"/></td>
                 <td>
                     <form method="post" action="<c:url value='/basket'/>">
                         <input type="number" hidden name="id" value="${j.service_id}" />
-                        <input type="submit" name="add" value="Заказать"/>
+                        <input type="submit" name="add" value="Add"/>
                     </form>
                 </td>
             </tr>

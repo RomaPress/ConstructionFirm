@@ -2,13 +2,14 @@ package com.pres.model;
 
 public class Customer {
 
-    private String first_name;
-    private String last_name;
-    private String patronymic;
-    private int phone_number;
-    private int customer_id;
+    protected String first_name;
+    protected String last_name;
+    protected String patronymic;
+    protected int phone_number;
+    protected int customer_id;
 
-    public Customer (String first_name, String last_name, String patronymic, int phone_number){
+    public Customer (int customer_id, String first_name, String last_name, String patronymic, int phone_number){
+        this.customer_id = customer_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.patronymic = patronymic;
@@ -18,8 +19,6 @@ public class Customer {
     public Customer(){
 
     }
-
-
 
     public int getCustomer_id() {
         return customer_id;
@@ -60,6 +59,7 @@ public class Customer {
     public void setPhone_number(int phone_number) {
         this.phone_number = phone_number;
     }
+
 
     @Override
     public String toString() {
