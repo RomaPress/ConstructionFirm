@@ -36,7 +36,7 @@
                 <td><%= k++%></td>
                 <td><c:out value="${j.name_service}"/></td>
                 <td><c:out value="${j.unit_price}"/></td>
-                <td><c:out value="${j.unit}"/></td>
+                <td><c:out value="${j.name_unit}"/></td>
                 <td>
                     <form method="post" action="<c:url value='/basket'/>">
                         <input type="number" hidden name="id" value="${j.service_id}" />

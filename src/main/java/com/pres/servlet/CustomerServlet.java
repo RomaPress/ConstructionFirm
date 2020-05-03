@@ -29,13 +29,4 @@ public class CustomerServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
 
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        ServiceRepository oneService = new ServiceRepository();
-
-        idToBasket.add(oneService.getServiceNameByServiceId(Integer.parseInt(req.getParameter("id"))));
-        req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
-
-    }
 }

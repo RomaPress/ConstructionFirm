@@ -28,7 +28,7 @@ public class CustomerRepository implements Repository {
         int result = 0;
         int count = 0;
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select max(customer_id) as customer_id from db_construction_firm.customer group by customer_id;");
+            PreparedStatement statement = connection.prepareStatement("select max(customer_id) as customer_id from db_construction_firm.customer;");
             ResultSet rs = statement.executeQuery();
             rs.next();
             result = rs.getInt(1);

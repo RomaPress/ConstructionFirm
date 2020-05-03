@@ -33,7 +33,7 @@ public class OrderRepository  implements Repository {
     public int getLastOrderId() {
         int result = 0;
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select max(order_id) as order_id  from db_construction_firm.\"order\" group by order_id;");
+            PreparedStatement statement = connection.prepareStatement("select max(order_id) as order_id  from db_construction_firm.\"order\";");
             ResultSet rs = statement.executeQuery();
             rs.next();
             result = rs.getInt(1);
@@ -78,9 +78,9 @@ public class OrderRepository  implements Repository {
 
                 result.add(order);
             }
-//            for (Order i : result){
-//                i.toString();
-//            }
+            for (Order i : result){
+                i.toString();
+            }
 
 
         } catch (SQLException e) {
@@ -89,12 +89,12 @@ public class OrderRepository  implements Repository {
         return result;
     }
 
-//    public static void main(String[] args) {
-//        GetOrder w = new GetOrder();
-//        ServiceRepository c = new ServiceRepository();
-//        OrderRepository q = new OrderRepository();
-//
-//
-//        q.orderInfo(c.getOrderedService(w.getOrderId()));
-//    }
+    public static void main(String[] args) {
+        GetOrder w = new GetOrder();
+        ServiceRepository c = new ServiceRepository();
+        OrderRepository q = new OrderRepository();
+
+
+        q.orderInfo(c.getOrderedService(w.getOrderId()));
+    }
 }

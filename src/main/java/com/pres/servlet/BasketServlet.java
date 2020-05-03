@@ -48,6 +48,8 @@ public class BasketServlet extends HttpServlet {
 
             ServiceOrderRepository sor = new ServiceOrderRepository();
             sor.setServiceOrder(ServiceToBasket);
+
+            req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
         }
 
 

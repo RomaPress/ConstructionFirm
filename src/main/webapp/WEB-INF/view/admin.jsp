@@ -51,9 +51,10 @@
             <td><c:out value="${i.price}"/></td>
             <td>
                 <form method="post" action="<c:url value='/admin'/>">
-                    <input type="number" hidden name="id" value="${i.order_id}" />
+                    <input type="number" hidden name="delete" value="${i.order_id}" />
                     <input type="submit" name="delete" value="delete"/>
                 </form>
+
                 <form method="post" action="<c:url value='/admin'/>">
                     <input type="number" hidden name="id" value="${i.order_id}" />
                     <input type="submit" name="update" value="update"/>
