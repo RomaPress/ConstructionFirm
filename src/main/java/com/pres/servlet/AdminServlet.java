@@ -4,7 +4,6 @@ import com.pres.database.repositories.get.GetOrder;
 import com.pres.database.repositories.impl.OrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.model.Order;
-import com.pres.model.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +38,10 @@ public class AdminServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if(req.getParameterMap().containsKey("delete")) {
+
+            OrderRepository delete = new OrderRepository();
+            delete.deleteOrder(Integer.parseInt(req.getParameter("delete")));
+
             Order del = null;
             for (Order i : orderList) {
                 if (i.getOrder_id() == Integer.parseInt(req.getParameter("delete"))) {

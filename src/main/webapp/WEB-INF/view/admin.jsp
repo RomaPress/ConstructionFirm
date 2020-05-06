@@ -55,8 +55,8 @@
                     <input type="submit" name="delete" value="delete"/>
                 </form>
 
-                <form method="post" action="<c:url value='/admin'/>">
-                    <input type="number" hidden name="id" value="${i.order_id}" />
+                <form method="get" action="<c:url value='/update'/>">
+                    <input type="number" hidden name="order_id" value="${i.order_id}" />
                     <input type="submit" name="update" value="update"/>
                 </form>
 

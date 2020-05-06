@@ -48,5 +48,16 @@
         <servlet-name>GetStartPageAdmin</servlet-name>
         <servlet-class>com.pres.servlet.AdminServlet</servlet-class>
     </servlet>
+
+    <!--Изменение заказа-->
+    <servlet-mapping>
+        <servlet-name>UpdateOrder</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateOrder</servlet-name>
+        <servlet-class>com.pres.servlet.UpdateServlet</servlet-class>
+    </servlet>
 </web-app>
         

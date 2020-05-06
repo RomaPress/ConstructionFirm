@@ -89,6 +89,28 @@ public class OrderRepository  implements Repository {
         return result;
     }
 
+    public void deleteOrder(int order_id){
+
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("delete from db_construction_firm.\"order\"  where order_id = ?");
+
+            statement.setInt(1, order_id);
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         GetOrder w = new GetOrder();
         ServiceRepository c = new ServiceRepository();

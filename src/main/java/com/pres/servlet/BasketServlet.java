@@ -32,8 +32,7 @@ public class BasketServlet extends HttpServlet {
             }
             ServiceToBasket.remove(del);
         }
-
-        if(req.getParameterMap().containsKey("Ok")){
+        else if(req.getParameterMap().containsKey("Ok")){
             final Customer customer = new Customer();
             customer.setFirst_name(req.getParameter("first_name"));
             customer.setLast_name(req.getParameter("last_name"));

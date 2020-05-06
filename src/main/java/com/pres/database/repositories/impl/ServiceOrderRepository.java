@@ -27,6 +27,37 @@ public class ServiceOrderRepository implements Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void deleteSomeService(int order_id, int service_id ){
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("delete from db_construction_firm.service_order where order_id = ? and service_id = ?;");
+
+            statement.setInt(1, order_id);
+            statement.setInt(2, service_id);
+
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void  updateAmount(int order_id, int service_id, float amount ){
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("update db_construction_firm.service_order set amount = ? where order_id = ? and service_id = ?;");
+
+            if(amount < 0) amount = 0;
+
+            statement.setFloat(1, amount);
+            statement.setInt(2, order_id);
+            statement.setInt(3, service_id);
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
