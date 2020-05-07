@@ -1,22 +1,17 @@
 package com.pres.servlet;
 
-import com.pres.database.repositories.get.GetOrder;
 import com.pres.database.repositories.get.GetStatus;
 import com.pres.database.repositories.impl.OrderRepository;
 import com.pres.database.repositories.impl.ServiceOrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.database.repositories.impl.StatusRepository;
 import com.pres.model.Order;
-import com.pres.model.Service;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

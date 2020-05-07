@@ -6,8 +6,15 @@
 </head>
 <body>
 
+<form method="get" action="<c:url value='/changeServiceList'/>">
+    <input type="text" hidden name="name" value="admin" />
+    <input type="submit" value="Каталог"/>
+</form>
 
 <table border="2">
+
+
+
 
     <caption>
         <h2>

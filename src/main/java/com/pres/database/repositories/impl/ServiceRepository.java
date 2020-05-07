@@ -39,16 +39,11 @@ public class ServiceRepository implements Repository {
     public Map<Integer, List<Service>> getOrderedService(List<Integer> order_id) {
 
         Map<Integer, List<Service>> result = new HashMap<>();
-
         try (Connection connection = getConnection()) {
-
             for (Integer i : order_id) {
-
-
                 PreparedStatement statement = connection.prepareStatement("select sro.order_id, sr.service_id, sr.name_service, un.name_unit, sro.amount from db_construction_firm.service sr left join db_construction_firm.unit un on sr.unit_id = un.unit_id   right join db_construction_firm.service_order sro on sr.service_id = sro.service_id where sro.order_id = ?;");
                 statement.setInt(1, i);
                 ResultSet rs = statement.executeQuery();
-
 
                 List<Service> orderedService = new ArrayList<>();
                 while (rs.next()) {
@@ -61,23 +56,25 @@ public class ServiceRepository implements Repository {
                 }
                 result.put(i, orderedService);
             }
-//            for (Map.Entry entry : result.entrySet()) {
-//                System.out.println("Key: " + entry.getKey() + " Value: "
-//                        + entry.getValue());
-//            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-//    public static void main(String[] args) {
-//        GetOrder w = new GetOrder();
-//
-//
-//        ServiceRepository q =new ServiceRepository();
-//        q.getOrderedService(w.getOrderId());
-//    }
+    public void setService(int classification_id, String name_service, float unit_price, int unit_id){
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("insert into db_construction_firm.service  ( classification_id, name_service, unit_price, unit_id) values(?,?,?,?);");
+
+            statement.setInt(1, classification_id);
+            statement.setString(2, name_service);
+            statement.setFloat(3, unit_price);
+            statement.setInt(4, unit_id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

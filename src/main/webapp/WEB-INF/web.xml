@@ -59,5 +59,16 @@
         <servlet-name>UpdateOrder</servlet-name>
         <servlet-class>com.pres.servlet.UpdateServlet</servlet-class>
     </servlet>
+
+    <!--Добавление и изменение каталога-->
+    <servlet-mapping>
+        <servlet-name>ChangeCatalog</servlet-name>
+        <url-pattern>/changeServiceList</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeCatalog</servlet-name>
+        <servlet-class>com.pres.servlet.ServiceCatalogServlet</servlet-class>
+    </servlet>
 </web-app>
         

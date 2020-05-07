@@ -1,27 +1,65 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="classification" class="com.pres.database.repositories.get.GetClassification" scope="page"/>
+<jsp:useBean id="classificationTitle" class="com.pres.database.repositories.get.GetClassification" scope="page"/>
 <html>
 <head>
-    <title>Title</title>
+
 </head>
 <body>
 
+<form method="post" action="<c:url value='/changeServiceList'/>">
 
-<form method="get" action="<c:url value='/basket'/>">
-    <input type="text" hidden name="goToBasket" value="showBasket" />
-    <input type="submit" value="Заказать"/>
+    <label>
+        <input type="text" name="name_service"/>
+    </label>
+
+    <label>
+        <input type="number" name="unit_price" />
+    </label>
+
+    <label>
+        <select name="unit" id="unit">
+            <c:forEach var="i" items="${unit}">
+                <option>
+                    <c:out value="${i.name_unit}"/>
+                </option>
+            </c:forEach>
+        </select>
+    </label>
+
+    <label>
+        <select name="classification" id="classification">
+            <c:forEach var="i" items="${classification}">
+                <option>
+                    <c:out value="${i.name_classification}"/>
+                </option>
+            </c:forEach>
+        </select>
+    </label>
+
+    <input type="submit" name="addService" value="Добавить"/>
 </form>
+
+
+
+
+
+
+
+
+
+
+
 
 <% int i = -1;%>
 <c:forEach var="i" items="${serviceTable}">
     <table border="2">
 
-            <caption>
-                <h2>
-                <%= classification.getNameClassification().get(++i)%>
-                </h2>
-            </caption>
+        <caption>
+            <h2>
+                <%= classificationTitle.getNameClassification().get(++i)%>
+            </h2>
+        </caption>
 
         <tr>
             <th>№</th>
@@ -47,8 +85,5 @@
         </c:forEach>
     </table>
 </c:forEach>
-
-
-
 </body>
 </html>
