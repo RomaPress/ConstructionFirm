@@ -76,5 +76,28 @@ public class ServiceRepository implements Repository {
             e.printStackTrace();
         }
     }
+
+    public void deleteService(int service_id){
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("delete from db_construction_firm.service where service_id = ? ;");
+            statement.setInt(1, service_id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void  updateUnitPrice( int service_id, float unit_price ){
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("update db_construction_firm.service set unit_price = ? where service_id = ?;");
+            statement.setFloat(1, unit_price);
+            statement.setInt(2, service_id);
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

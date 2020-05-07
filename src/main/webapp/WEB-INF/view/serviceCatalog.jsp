@@ -64,23 +64,39 @@
         <tr>
             <th>№</th>
             <th>Название услуги</th>
+            <th>Удалить</th>
             <td>Цена</td>
-            <td>за единицу</td>
-            <td>добавить в корину</td>
+            <td></td>
+            <td>Изменить</td>
         </tr>
         <%int k = 1;%>
         <c:forEach var="j" items="${i}">
             <tr>
                 <td><%= k++%></td>
                 <td><c:out value="${j.name_service}"/></td>
-                <td><c:out value="${j.unit_price}"/></td>
-                <td><c:out value="${j.name_unit}"/></td>
+
                 <td>
-                    <form method="post" action="<c:url value='/basket'/>">
-                        <input type="number" hidden name="id" value="${j.service_id}" />
-                        <input type="submit" name="add" value="Add"/>
+                    <form method="post" action="<c:url value='/changeServiceList'/>">
+                        <input type="number" hidden name="service_id" value="${j.service_id}" />
+                        <input type="submit" name="delete" value="Удалить"/>
                     </form>
                 </td>
+
+                <td><c:out value="${j.unit_price}"/> <c:out value="${j.name_unit}"/></td>
+
+                <form method="post" action="<c:url value='/changeServiceList'/>">
+                    <td>
+                        <label>
+                            <input type="number" name="${j.service_id}" value="<c:out value="${j.unit_price}"/>"/>
+                        </label>
+                    </td>
+
+
+                    <td>
+                        <input type="number" hidden name="service_id" value="${j.service_id}"/>
+                        <input type="submit" name="change" value="Изменить"/>
+                    </td>
+                </form>
             </tr>
         </c:forEach>
     </table>

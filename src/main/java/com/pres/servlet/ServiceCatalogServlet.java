@@ -4,6 +4,7 @@ import com.pres.database.repositories.get.GetClassification;
 import com.pres.database.repositories.get.GetService;
 import com.pres.database.repositories.get.GetUnit;
 import com.pres.database.repositories.impl.ClassificationRepository;
+import com.pres.database.repositories.impl.ServiceOrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.database.repositories.impl.UnitRepository;
 import sun.plugin2.os.windows.FLASHWINFO;
@@ -40,7 +41,7 @@ public class ServiceCatalogServlet extends HttpServlet {
 
         if (req.getParameterMap().containsKey("addService")) {
 
-            if (req.getParameter("name_service") == "" || req.getParameter("unit_price") == "" || Float.parseFloat(req.getParameter("unit_price")) <= 0) {
+            if (req.getParameter("name_service").equals("") || req.getParameter("unit_price").equals("") || Float.parseFloat(req.getParameter("unit_price")) <= 0) {
                 req.getRequestDispatcher("/WEB-INF/view/serviceCatalog.jsp").forward(req, resp);
             } else {
                 ClassificationRepository cr = new ClassificationRepository();
@@ -48,6 +49,21 @@ public class ServiceCatalogServlet extends HttpServlet {
                 ServiceRepository sr = new ServiceRepository();
 
                 sr.setService(cr.getClassificationId(req.getParameter("classification")), req.getParameter("name_service"), Float.parseFloat(req.getParameter("unit_price")), ur.getUnitId(req.getParameter("unit")));
+                doGet(req, resp);
+            }
+        }
+        if (req.getParameterMap().containsKey("delete")) {
+            ServiceRepository sr = new ServiceRepository();
+            sr.deleteService(Integer.parseInt(req.getParameter("service_id")));
+            doGet(req, resp);
+        }
+        if (req.getParameterMap().containsKey("change")) {
+
+            if (Float.parseFloat(req.getParameter(req.getParameter("service_id"))) <= 0) {
+                req.getRequestDispatcher("/WEB-INF/view/serviceCatalog.jsp").forward(req, resp);
+            } else {
+                ServiceRepository sr = new ServiceRepository();
+                sr.updateUnitPrice(Integer.parseInt(req.getParameter("service_id")), Float.parseFloat(req.getParameter(req.getParameter("service_id"))));
                 doGet(req, resp);
             }
         }
