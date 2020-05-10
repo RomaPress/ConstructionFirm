@@ -12,6 +12,7 @@ public class Order extends Customer {
     private List<Service> orderedServices;
     private float price;
 
+
     public Order( int customer_id, String first_name, String last_name, String patronymic, int phone_number,int order_id, Date data, String status, List<Service> orderedServices, float price){
         super(customer_id, first_name, last_name, patronymic, phone_number);
         this.order_id = order_id;

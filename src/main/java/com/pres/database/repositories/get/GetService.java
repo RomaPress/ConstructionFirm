@@ -19,24 +19,17 @@ public class GetService implements Repository {
 
         try (Connection connection = getConnection()) {
 
-
             for (int i = 0; i < cf.getNameClassification().size(); i++) {
 
                 PreparedStatement statement = connection.prepareStatement("select service_id, name_service, unit_price, un.name_unit  from db_construction_firm.service sr inner join  db_construction_firm.classification cl on sr.classification_id = cl.classification_id  inner join db_construction_firm.unit un on sr.unit_id = un.unit_id where name_classification = ? ");
                 statement.setString(1, cf.getNameClassification().get(i));
                 statement.execute();
                 ResultSet rs = statement.executeQuery();
-
-
                 List<Service> classificationService = new ArrayList<>();
-
-
                 Service oneService;
 
                 while (rs.next()) {
                     oneService = new Service();
-
-
                     oneService.setService_id(rs.getInt("service_id"));
                     oneService.setName_service(rs.getString("name_service"));
                     oneService.setUnit_price(rs.getFloat("unit_price"));
@@ -49,6 +42,7 @@ public class GetService implements Repository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
         return allService;
     }

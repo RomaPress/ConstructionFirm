@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<form method="get" action="<c:url value='/admin'/>">
+    <input type="text" hidden name="name" value="customer" />
+    <input type="submit"  value="Выйти"/>
+</form>
 
 <table border="2">
 
@@ -16,9 +20,7 @@
     </caption>
     <c:forEach var="i" items="${updateOrder}">
 
-
         <h3>Заказа №<c:out value="${i.order_id}"/></h3>
-
 
         <h3> Статус: <c:out value="${i.status}"/></h3>
         <form method="post" action="<c:url value='/update'/>">
@@ -45,7 +47,6 @@
             <th></th>
             <th>Изменить</th>
         </tr>
-
 
         <c:forEach var="j" items="${i.orderedServices}">
             <tr>
@@ -87,7 +88,6 @@
         </c:forEach>
     </c:forEach>
 </table>
-
 
 </body>
 </html>

@@ -29,20 +29,19 @@ public class UpdateServlet extends HttpServlet {
 
         if (req.getParameterMap().containsKey("update")) {
             updateOrderId.add(Integer.parseInt(req.getParameter("order_id")));
+
         } else {
             updateOrderId.add(updateOrder.get(0).getOrder_id());
         }
         if (updateOrder.size() > 0) {
             updateOrder.clear();
         }
+
         updateOrder.addAll(orderRepository.orderInfo(orderedService.getOrderedService(updateOrderId)));
-
-
 
         req.setAttribute("status", status.getStatus());
         req.setAttribute("updateOrder", updateOrder);
         req.getRequestDispatcher("/WEB-INF/view/update.jsp").forward(req, resp);
-
     }
 
     @Override
@@ -57,8 +56,13 @@ public class UpdateServlet extends HttpServlet {
 
             ServiceOrderRepository update = new ServiceOrderRepository();
             update.updateAmount(updateOrder.get(0).getOrder_id(), Integer.parseInt(req.getParameter("service_id")), Float.parseFloat(req.getParameter(req.getParameter("service_id"))));
+            OrderRepository orderRepository = new OrderRepository();
+            for (Order i : updateOrder) {
+                orderRepository.setPrice(i.getPrice(), updateOrder.get(0).getOrder_id());
+            }
+
         }
-        if (req.getParameterMap().containsKey("changeStatus")){
+        if (req.getParameterMap().containsKey("changeStatus")) {
 
             StatusRepository sr = new StatusRepository();
             sr.changeStatus(sr.getStatusId(req.getParameter("status")), updateOrder.get(0).getOrder_id());

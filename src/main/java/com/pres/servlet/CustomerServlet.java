@@ -28,5 +28,4 @@ public class CustomerServlet extends HttpServlet {
         session.setAttribute("serviceTable", serviceTable.getService());
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
-
 }

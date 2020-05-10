@@ -10,26 +10,24 @@ import java.util.List;
 
 public class ServiceOrderRepository implements Repository {
 
-    public void setServiceOrder(List<Service> basket){
+    public void setServiceOrder(List<Service> basket) {
 
         OrderRepository or = new OrderRepository();
 
         try (Connection connection = getConnection()) {
-        for (Service i: basket) {
-            PreparedStatement statement = connection.prepareStatement("insert into db_construction_firm.service_order (service_id, order_id) values (?,?);");
-            int j = 0;
-            int q = i.getService_id();
-            int w = or.getLastOrderId();
-            statement.setInt(++j, i.getService_id());
-            statement.setInt(++j, or.getLastOrderId());
-            statement.execute();
-        }
+            for (Service i : basket) {
+                PreparedStatement statement = connection.prepareStatement("insert into db_construction_firm.service_order (service_id, order_id) values (?,?);");
+                int j = 0;
+                statement.setInt(++j, i.getService_id());
+                statement.setInt(++j, or.getLastOrderId());
+                statement.execute();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteSomeService(int order_id, int service_id ){
+    public void deleteSomeService(int order_id, int service_id) {
         try (Connection connection = getConnection()) {
 
             PreparedStatement statement = connection.prepareStatement("delete from db_construction_firm.service_order where order_id = ? and service_id = ?;");
@@ -44,12 +42,12 @@ public class ServiceOrderRepository implements Repository {
         }
     }
 
-    public void  updateAmount(int order_id, int service_id, float amount ){
+    public void updateAmount(int order_id, int service_id, float amount) {
         try (Connection connection = getConnection()) {
 
             PreparedStatement statement = connection.prepareStatement("update db_construction_firm.service_order set amount = ? where order_id = ? and service_id = ?;");
 
-            if(amount < 0) amount = 0;
+            if (amount < 0) amount = 0;
 
             statement.setFloat(1, amount);
             statement.setInt(2, order_id);

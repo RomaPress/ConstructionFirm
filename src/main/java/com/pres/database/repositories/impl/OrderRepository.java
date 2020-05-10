@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class OrderRepository  implements Repository {
+public class OrderRepository implements Repository {
 
-    public void setOrder(){
+    public void setOrder() {
         CustomerRepository cs = new CustomerRepository();
         try (Connection connection = getConnection()) {
 
@@ -23,6 +23,21 @@ public class OrderRepository  implements Repository {
             int i = 0;
             statement.setInt(++i, 1);
             statement.setInt(++i, cs.getLastCustomerId());
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setOrderByOldCustomer(int customer_id) {
+        CustomerRepository cs = new CustomerRepository();
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("insert into db_construction_firm.\"order\" (date, status_id, customer_id) values (current_date, ?,?);");
+            int i = 0;
+            statement.setInt(++i, 1);
+            statement.setInt(++i, customer_id);
 
             statement.execute();
         } catch (SQLException e) {
@@ -43,9 +58,11 @@ public class OrderRepository  implements Repository {
         return result;
     }
 
-    public List<Order> orderInfo (Map<Integer, List<Service>> orderedServices){
+
+    public List<Order> orderInfo(Map<Integer, List<Service>> orderedServices) {
 
         List<Order> result = new ArrayList<>();
+        OrderRepository or = new OrderRepository();
         try (Connection connection = getConnection()) {
 
             for (Integer key : orderedServices.keySet()) {
@@ -61,35 +78,43 @@ public class OrderRepository  implements Repository {
 
                 java.sql.Date date = rs.getDate("date");
                 order.setData(new java.util.Date(date.getTime()));
-
                 order.setCustomer_id(rs.getInt("customer_id"));
                 order.setFirst_name(rs.getString("first_name"));
-                order.setLast_name (rs.getString("last_name"));
-                order.setPatronymic (rs.getString("patronymic"));
+                order.setLast_name(rs.getString("last_name"));
+                order.setPatronymic(rs.getString("patronymic"));
                 order.setPhone_number(rs.getInt("phone_number"));
                 order.setStatus(rs.getString("name_status"));
-                order.setOrderedServices(orderedServices.get(key));
 
+                order.setOrderedServices(orderedServices.get(key));
+                List<Service> services = orderedServices.get(key);
                 float price = 0;
-                for(int i = 0; i<orderedServices.get(key).size(); i++){
+                for (int i = 0; i < orderedServices.get(key).size(); i++) {
                     price += orderedServices.get(key).get(i).getAmount() * orderedServices.get(key).get(i).getUnit_price();
                 }
+
                 order.setPrice(price);
 
                 result.add(order);
             }
-            for (Order i : result){
-                i.toString();
-            }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    public void deleteOrder(int order_id){
+    public void setPrice(float price, int order_id) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("update db_construction_firm.\"order\" set price = ? where order_id = ? ;");
+
+            statement.setFloat(1, price);
+            statement.setInt(2, order_id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteOrder(int order_id) {
 
         try (Connection connection = getConnection()) {
 
@@ -101,22 +126,5 @@ public class OrderRepository  implements Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-
-
-
-
-
-
-
-
-    public static void main(String[] args) {
-        GetOrder w = new GetOrder();
-        ServiceRepository c = new ServiceRepository();
-        OrderRepository q = new OrderRepository();
-
-
-        q.orderInfo(c.getOrderedService(w.getOrderId()));
     }
 }

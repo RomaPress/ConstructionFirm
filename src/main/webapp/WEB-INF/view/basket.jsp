@@ -35,7 +35,6 @@
     </tr>
     </c:forEach>
 
-
     <form method="get" action="<c:url value='/basket'/>">
         <label>
             <input type="text" name="first_name" />first_name
@@ -56,11 +55,6 @@
 
         <input type="submit"  name="Ok" value="Заказать"><br>
     </form>
-
-
-
-
-
 
 </body>
 </html>

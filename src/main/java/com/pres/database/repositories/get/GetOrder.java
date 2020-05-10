@@ -16,7 +16,24 @@ public class GetOrder implements Repository{
 
         try (Connection connection = getConnection()) {
 
-            PreparedStatement statement = connection.prepareStatement("select order_id from db_construction_firm.\"order\";");
+            PreparedStatement statement = connection.prepareStatement("select order_id from db_construction_firm.\"order\" ");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getInt ("order_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Integer> getOrderIdByStatus(int status_id){
+        List<Integer> result = new ArrayList<>();
+
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("select order_id from db_construction_firm.\"order\" where status_id = ? ");
+            statement.setInt(1, status_id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 result.add(rs.getInt ("order_id"));

@@ -6,6 +6,10 @@
 
 </head>
 <body>
+<form method="get" action="<c:url value='/admin'/>">
+    <input type="text" hidden name="name" value="customer" />
+    <input type="submit"  value="Выйти"/>
+</form>
 
 <form method="post" action="<c:url value='/changeServiceList'/>">
 

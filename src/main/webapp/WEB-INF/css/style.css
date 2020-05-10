@@ -1,0 +1,13 @@
+.customer_btn {
+    margin: 10px 10px 40px 10px;
+}
+caption{
+    caption-side: top;
+}
+p{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'ProximaNova_bold', sans-serif;
+    font-size: 1.3rem;
+}

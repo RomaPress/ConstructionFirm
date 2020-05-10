@@ -22,7 +22,7 @@ public class BasketServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(req.getParameterMap().containsKey("delete")) {
+        if (req.getParameterMap().containsKey("delete")) {
             Service del = null;
             for (Service i : ServiceToBasket) {
                 if (i.getService_id() == Integer.parseInt(req.getParameter("delete"))) {
@@ -32,7 +32,7 @@ public class BasketServlet extends HttpServlet {
             }
             ServiceToBasket.remove(del);
         }
-        else if(req.getParameterMap().containsKey("Ok")){
+        else if (req.getParameterMap().containsKey("Ok")) {
             final Customer customer = new Customer();
             customer.setFirst_name(req.getParameter("first_name"));
             customer.setLast_name(req.getParameter("last_name"));
@@ -40,30 +40,32 @@ public class BasketServlet extends HttpServlet {
             customer.setPhone_number(Integer.parseInt(req.getParameter("phone_number")));
 
             CustomerRepository cr = new CustomerRepository();
-            cr.setCustomer(customer);
-
-            OrderRepository or = new OrderRepository();
-            or.setOrder();
-
+            if(!cr.searchCustomer(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("patronymic"), Integer.parseInt(req.getParameter("phone_number")))){
+                OrderRepository or = new OrderRepository();
+                or.setOrderByOldCustomer(cr.searchCustomerId(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("patronymic"), Integer.parseInt(req.getParameter("phone_number"))));
+            }else {
+                cr.setCustomer(customer);
+                OrderRepository or = new OrderRepository();
+                or.setOrder();
+            }
             ServiceOrderRepository sor = new ServiceOrderRepository();
             sor.setServiceOrder(ServiceToBasket);
-
             req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
         }
-
 
         req.setAttribute("ServiceToBasket", ServiceToBasket);
         req.getRequestDispatcher("/WEB-INF/view/basket.jsp").forward(req, resp);
     }
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServiceRepository oneService = new ServiceRepository();
 
-        ServiceToBasket.add(oneService.getServiceNameByServiceId(Integer.parseInt(req.getParameter("id"))));
+        if (!ServiceToBasket.contains(oneService.getServiceNameByServiceId(Integer.parseInt(req.getParameter("id"))))) {
+            ServiceToBasket.add(oneService.getServiceNameByServiceId(Integer.parseInt(req.getParameter("id"))));
+        }
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
-
 }
 
 

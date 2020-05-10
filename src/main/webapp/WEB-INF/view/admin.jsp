@@ -7,21 +7,39 @@
 <body>
 
 <form method="get" action="<c:url value='/changeServiceList'/>">
-    <input type="text" hidden name="name" value="admin" />
+    <label>
+        <input type="text" hidden name="name" value="admin" />
+    </label>
     <input type="submit" value="Каталог"/>
 </form>
-
+<form method="get" action="<c:url value='/'/>">
+    <label>
+        <input type="text" hidden name="name" value="customer" />
+    </label>
+    <input type="submit"  value="Выйти"/>
+</form>
 <table border="2">
 
-
-
-
+    <form method="post" action="<c:url value='/admin'/>">
+        <label>
+            <input type="radio" value="1" name="btn"/>
+        </label>Новые заказы<Br>
+        <label>
+            <input type="radio" value="2" name="btn"/>
+        </label>Заказы в исполнении<Br>
+        <label>
+            <input type="radio" value="3" name="btn"/>
+        </label>Выполненные<Br>
+        <label>
+            <input type="radio" value="4" name="btn"/>
+        </label>Все заказы<Br>
+        <input type="submit"  name="sort" value="Выбрать"/>
+    </form>
     <caption>
         <h2>
             Заказы
         </h2>
     </caption>
-
     <tr>
         <th>№ Заказа</th>
         <th>Статус</th>

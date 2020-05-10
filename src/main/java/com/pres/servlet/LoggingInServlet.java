@@ -24,18 +24,14 @@ public class LoggingInServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
         HttpSession session = req.getSession();
 
         session.setAttribute("firstList", firstList);
         req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
-
-
     }
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 
         resp.setCharacterEncoding("UTF-8");
@@ -50,6 +46,4 @@ public class LoggingInServlet extends HttpServlet {
                 break;
         }
     }
-
-
 }
