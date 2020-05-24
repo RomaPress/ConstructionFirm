@@ -6,6 +6,7 @@ import com.pres.database.repositories.impl.ServiceOrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.database.repositories.impl.StatusRepository;
 import com.pres.model.Order;
+import com.pres.model.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,6 +67,19 @@ public class UpdateServlet extends HttpServlet {
 
             StatusRepository sr = new StatusRepository();
             sr.changeStatus(sr.getStatusId(req.getParameter("status")), updateOrder.get(0).getOrder_id());
+        }
+        if (req.getParameterMap().containsKey("add")) {
+
+            boolean valid = true;
+            for (Service i : updateOrder.get(0).getOrderedServices()){
+                if( i.getService_id() == Integer.parseInt(req.getParameter("service_id"))){
+                    valid = false;
+                }
+            }
+            if(valid){
+                ServiceOrderRepository sor = new ServiceOrderRepository();
+                sor.addServiceOrder(Integer.parseInt(req.getParameter("service_id")), updateOrder.get(0).getOrder_id());
+            }
         }
         doGet(req, resp);
     }

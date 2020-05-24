@@ -17,17 +17,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-2">
 
             <form class="customer_btn" method="get" action="<c:url value='/basket'/>">
                 <input type="text" hidden name="goToBasket" value="showBasket"/>
-                <input type="submit" value="Заказать"/>
+                <button class="button" type="submit" name="add"><span>Заказать </span></button>
             </form>
-
+        </div>
+        <div class="col-4">
+            <a href="https://instagram.com/serg.shevchenko100?igshid=171zkkfckk0x1"><span>Смотреть портфолмо</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <% int i = -1;%>
             <c:forEach var="i" items="${serviceTable}">
-<%--                <table border="1" class="table table-striped">--%>
-                <table border="1" class="table table-hover">
+                <table border="1" class="table table1 table-hover">
                     <caption>
                         <h3>
                             <%= classification.getNameClassification().get(++i)%>
@@ -46,7 +51,8 @@
                     <c:forEach var="j" items="${i}">
                     <tbody>
                     <tr>
-                        <td><p><%= k++%></p></td>
+                        <td><p><%= k++%>
+                        </p></td>
                         <td><p><c:out value="${j.name_service}"/></p></td>
                         <td><p><c:out value="${j.unit_price}"/></p></td>
                         <td><p><c:out value="${j.name_unit}"/></p></td>
@@ -54,7 +60,9 @@
                                 <%--                    <form method="post" action="<c:url value='/basket'/> id = "foo">--%>
                             <form method="post" action="<c:url value='/basket'/>">
                                 <input type="number" hidden name="id" value="${j.service_id}"/>
-                                <input type="submit" name="add" value="Добавить"/>
+
+                                    <%--                                <input class="button" type="submit" name="add" <span>Hover </span>value="Добавить"/>--%>
+                                <button class="button" type="submit" name="add"><span>Добавить </span></button>
                             </form>
                         </td>
                     </tr>

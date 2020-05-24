@@ -40,6 +40,8 @@
         <h3>ФИО <c:out value="${i.last_name}"/> <c:out value="${i.first_name}"/> <c:out value="${i.patronymic}"/></h3>
         <h3>Номер: +380<c:out value="${i.phone_number}"/></h3>
         Цена <c:out value="${i.price}"/>
+        </br>
+        </br>
         <tr>
             <th>Услуги</th>
             <th>Удалить</th>
@@ -73,7 +75,7 @@
                 <form method="post" action="<c:url value='/update'/>">
                     <td>
                         <label>
-                            <input type="number" name="${j.service_id}" value="<c:out value="${j.amount}"/>"/>
+                            <input type="number" step = "0.01" name="${j.service_id}" value="<c:out value="${j.amount}"/>" required/>
                         </label>
                     </td>
 
@@ -87,6 +89,14 @@
             </tr>
         </c:forEach>
     </c:forEach>
+
+    <form method="post" action="<c:url value='/update'/>">
+        <input type="number"  name="service_id" required/>
+        <input type="submit" name="add" value="Добавить"/>
+    </form>
+
+
+
 </table>
 
 </body>

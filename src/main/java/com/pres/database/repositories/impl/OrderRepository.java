@@ -1,10 +1,8 @@
 package com.pres.database.repositories.impl;
 
 import com.pres.database.repositories.Repository;
-import com.pres.database.repositories.get.GetOrder;
 import com.pres.model.Order;
 import com.pres.model.Service;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,13 +113,9 @@ public class OrderRepository implements Repository {
     }
 
     public void deleteOrder(int order_id) {
-
         try (Connection connection = getConnection()) {
-
             PreparedStatement statement = connection.prepareStatement("delete from db_construction_firm.\"order\"  where order_id = ?");
-
             statement.setInt(1, order_id);
-
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

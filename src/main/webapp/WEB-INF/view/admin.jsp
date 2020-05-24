@@ -82,7 +82,7 @@
 
                 <form method="get" action="<c:url value='/update'/>">
                     <input type="number" hidden name="order_id" value="${i.order_id}" />
-                    <input type="submit" name="update" value="update"/>
+                    <input type="submit"  name="update" value="update"/>
                 </form>
 
             </td>

@@ -5,8 +5,8 @@ import com.pres.database.ConnectionFactory;
 import java.sql.Connection;
 
 public interface Repository {
-    default Connection getConnection() {
 
+    default Connection getConnection() {
         return ConnectionFactory.getConnection();
     }
 }

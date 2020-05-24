@@ -14,11 +14,11 @@
 <form method="post" action="<c:url value='/changeServiceList'/>">
 
     <label>
-        <input type="text" name="name_service"/>
+        <input type="text" name="name_service" required/>
     </label>
 
     <label>
-        <input type="number" name="unit_price" />
+        <input type="number" name="unit_price" step = "0.01" required/>
     </label>
 
     <label>
@@ -46,15 +46,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <% int i = -1;%>
 <c:forEach var="i" items="${serviceTable}">
     <table border="2">
@@ -73,10 +64,10 @@
             <td></td>
             <td>Изменить</td>
         </tr>
-        <%int k = 1;%>
+
         <c:forEach var="j" items="${i}">
             <tr>
-                <td><%= k++%></td>
+                <td><c:out value="${j.service_id}"/></td>
                 <td><c:out value="${j.name_service}"/></td>
 
                 <td>
@@ -91,7 +82,7 @@
                 <form method="post" action="<c:url value='/changeServiceList'/>">
                     <td>
                         <label>
-                            <input type="number" name="${j.service_id}" value="<c:out value="${j.unit_price}"/>"/>
+                            <input type="number" name="${j.service_id}" value="<c:out value="${j.unit_price}"/>" step = "0.01" required//>
                         </label>
                     </td>
 

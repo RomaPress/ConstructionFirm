@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Order extends Customer {
+public class Order extends Customer implements Comparable<Order> {
 
     private int order_id;
     private Date data;
@@ -13,7 +13,7 @@ public class Order extends Customer {
     private float price;
 
 
-    public Order( int customer_id, String first_name, String last_name, String patronymic, int phone_number,int order_id, Date data, String status, List<Service> orderedServices, float price){
+    public Order(int customer_id, String first_name, String last_name, String patronymic, int phone_number, int order_id, Date data, String status, List<Service> orderedServices, float price) {
         super(customer_id, first_name, last_name, patronymic, phone_number);
         this.order_id = order_id;
         this.data = data;
@@ -22,7 +22,7 @@ public class Order extends Customer {
         this.price = price;
     }
 
-    public Order(){
+    public Order() {
         super();
     }
 
@@ -92,7 +92,7 @@ public class Order extends Customer {
     }
 
     public void setData(Date data) {
-       this.data = data;
+        this.data = data;
     }
 
     public void setStatus(String status) {
@@ -132,5 +132,10 @@ public class Order extends Customer {
                 ", phone_number=" + phone_number +
                 ", customer_id=" + customer_id +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return order_id - o.order_id;
     }
 }

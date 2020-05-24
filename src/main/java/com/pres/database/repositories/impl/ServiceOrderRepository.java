@@ -27,6 +27,19 @@ public class ServiceOrderRepository implements Repository {
         }
     }
 
+    public void addServiceOrder(int service_id, int order_id) {
+
+        try (Connection connection = getConnection()) {
+                PreparedStatement statement = connection.prepareStatement("insert into db_construction_firm.service_order (service_id, order_id) values (?,?);");
+                statement.setInt(1, service_id);
+                statement.setInt(2, order_id);
+                statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteSomeService(int order_id, int service_id) {
         try (Connection connection = getConnection()) {
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdminServlet extends HttpServlet {
@@ -36,7 +37,7 @@ public class AdminServlet extends HttpServlet {
         } else {
             orderList.addAll(order.orderInfo(orderedService.getOrderedService(ordersId.getOrderId())));
         }
-
+        Collections.sort(orderList);
         req.setAttribute("order", orderList);
         req.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(req, resp);
     }

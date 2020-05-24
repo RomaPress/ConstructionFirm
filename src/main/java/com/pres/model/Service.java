@@ -2,7 +2,7 @@ package com.pres.model;
 
 import java.util.Objects;
 
-public class Service {
+public class Service implements Comparable<Service>{
 
     private int service_id;
     private String name_service;
@@ -87,8 +87,9 @@ public class Service {
                 Objects.equals(amount, service.amount);
     }
 
+
     @Override
-    public int hashCode() {
-        return Objects.hash(service_id, name_service, name_unit, unit_price, amount);
+    public int compareTo(Service o) {
+        return service_id - o.service_id;
     }
 }

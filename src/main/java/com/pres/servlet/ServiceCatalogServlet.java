@@ -4,28 +4,28 @@ import com.pres.database.repositories.get.GetClassification;
 import com.pres.database.repositories.get.GetService;
 import com.pres.database.repositories.get.GetUnit;
 import com.pres.database.repositories.impl.ClassificationRepository;
-import com.pres.database.repositories.impl.ServiceOrderRepository;
 import com.pres.database.repositories.impl.ServiceRepository;
 import com.pres.database.repositories.impl.UnitRepository;
-import sun.plugin2.os.windows.FLASHWINFO;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class ServiceCatalogServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GetService serviceTable = new GetService();
+
         HttpSession session = req.getSession();
 
         GetUnit unit = new GetUnit();
         GetClassification classification = new GetClassification();
+
+
+
 
         session.setAttribute("unit", unit.getUnit());
         session.setAttribute("classification", classification.geClassification());

@@ -1,7 +1,6 @@
 package com.pres.database.repositories.impl;
 
 import com.pres.database.repositories.Repository;
-import com.pres.database.repositories.get.GetClassification;
 import com.pres.model.Service;
 
 import java.sql.Connection;

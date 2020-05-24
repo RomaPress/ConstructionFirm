@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GetService implements Repository {
@@ -35,14 +36,13 @@ public class GetService implements Repository {
                     oneService.setUnit_price(rs.getFloat("unit_price"));
                     oneService.setName_unit("грн/" + rs.getString("name_unit"));
 
-
                     classificationService.add(oneService);
                 }
+                Collections.sort(classificationService);
                 allService.add(classificationService);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
         return allService;
     }
