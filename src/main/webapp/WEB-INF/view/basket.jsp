@@ -60,19 +60,18 @@
                         <form  method="get" action="<c:url value='/basket'/>">
                             <label class="label1">Имя</label>
                             <input class="main-font-input" type="text" name="first_name" required pattern = "[А-Яа-яЁё]{2,15}"/>
-                            <label class="label1">Фамиля</label>
+                            <label class="label1">Фамилия</label>
                             <input class="main-font-input" type="text" name="last_name" required pattern = "[А-Яа-яЁё]{2,15}"/>
                             <label class="label1">Отчество</label>
                             <input class="main-font-input" type="text" name="patronymic" required pattern = "[А-Яа-яЁё]{2,15}"/>
                             <label class="label1">Номер телефона</label>
-                            <input class="main-font-input" type="number" name="phone_number" required pattern = "[0-9]{8,10}"/>
-                            <input type="submit" name="Ok" value="Заказать"><br>
-                            <small>Маленький текст</small>
+                            <input class="main-font-input" type="text" name="phone_number" required pattern = "[0-9]{8,10}"/>
+                            <input class="button" type="submit" name="Ok" value="Заказать"><br>
+                            <small>Нажав на кнопку "Заказать" Вы соглашаетесь на обработку предоставленных Вами персональных данных</small>
                         </form>
                     </div>
                 </div>
-<%--            </div>--%>
-<%--    offset-2--%>
+
             <div class="col-6 ">
 
                 <table border="1" class="table table-hover">

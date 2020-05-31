@@ -34,8 +34,21 @@ p {
     width: 180px;
     transition: all 0.5s;
     cursor: pointer;
-
 }
+.long-button{
+    border-radius: 4px;
+    background-color: #343a40;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 3px 0px 3px 0px;
+    width: 400px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.success {background-color: #3e5260;}
+.success:hover {background-color: #343a40;}
 
 .button span {
     cursor: pointer;
@@ -97,15 +110,17 @@ label {
 }
 
 .main-form {
-
-    background-color: #85ffc5;
+    border: 4px double #343a40;
+    margin-top: 19px;
+    background-color: white;
     text-align: center;
-    padding: 4rem 4rem;
+    padding: 2rem 5rem;
 
 }
 
 a {
     display: block;
+    font-size: 1.15em;
     margin-top: 10px;
     color: #343a40;
     padding-top: 15px;

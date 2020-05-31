@@ -54,11 +54,15 @@ public class BasketServlet extends HttpServlet {
             } else {
                 req.getRequestDispatcher("/WEB-INF/view/basket.jsp").forward(req, resp);
             }
-
+        }
+        if (req.getParameterMap().containsKey("out")) {
+            ServiceToBasket.clear();
+            req.getRequestDispatcher("/WEB-INF/view/loggingIn.jsp").forward(req, resp);
+        } else {
+            req.setAttribute("ServiceToBasket", ServiceToBasket);
+            req.getRequestDispatcher("/WEB-INF/view/basket.jsp").forward(req, resp);
         }
 
-        req.setAttribute("ServiceToBasket", ServiceToBasket);
-        req.getRequestDispatcher("/WEB-INF/view/basket.jsp").forward(req, resp);
     }
 
     @Override

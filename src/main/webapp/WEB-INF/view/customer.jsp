@@ -20,8 +20,12 @@
         <div class="col-2">
 
             <form class="customer_btn" method="get" action="<c:url value='/basket'/>">
-                <input type="text" hidden name="goToBasket" value="showBasket"/>
                 <button class="button" type="submit" name="add"><span>Заказать </span></button>
+            </form>
+        </div>
+        <div class="col-2">
+            <form class="customer_btn" method="get" action="<c:url value='/basket'/>">
+                <button class="button" type="submit" name="out"><span>Выйти </span></button>
             </form>
         </div>
         <div class="col-4">
@@ -57,11 +61,8 @@
                         <td><p><c:out value="${j.unit_price}"/></p></td>
                         <td><p><c:out value="${j.name_unit}"/></p></td>
                         <td>
-                                <%--                    <form method="post" action="<c:url value='/basket'/> id = "foo">--%>
                             <form method="post" action="<c:url value='/basket'/>">
                                 <input type="number" hidden name="id" value="${j.service_id}"/>
-
-                                    <%--                                <input class="button" type="submit" name="add" <span>Hover </span>value="Добавить"/>--%>
                                 <button class="button" type="submit" name="add"><span>Добавить </span></button>
                             </form>
                         </td>
